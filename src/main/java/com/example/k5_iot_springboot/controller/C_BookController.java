@@ -102,6 +102,11 @@ public class C_BookController {
             @PathVariable C_Category category
             ) {
         ResponseDto<List<BookResponseDto>> books = bookService.getBooksByCategory(category);
+
+//        return books.getMessage().equals("SUCCESS")
+//                ? ResponseEntity.status(HttpStatus.OK).body(books)
+//                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResponseDto.set(false, "에러", null));
+//
         return ResponseEntity
                 .status(books.getMessage().equals("SUCCESS") ? HttpStatus.OK : HttpStatus.BAD_REQUEST)
                 .body(books);
