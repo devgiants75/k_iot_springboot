@@ -67,10 +67,13 @@ CREATE TABLE IF NOT EXISTS `comments` (
     KEY `idx_comment_post_id` (`post_id`),
     KEY `idx_comment_commenter` (`commenter`),
     CONSTRAINT `fk_comment_post`
-		FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) 
+		FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 ) ENGINE=InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci
   COMMENT = '댓글';
+  
+SELECT * FROM `posts`;
+SELECT * FROM `comments`;
