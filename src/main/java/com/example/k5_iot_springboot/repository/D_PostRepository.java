@@ -171,4 +171,31 @@ public interface D_PostRepository extends JpaRepository<D_Post, Long> {
         LIMIT :limit
     """, nativeQuery = true)
     List<PostWithCommentCountProjection> findTopPostsByCommentCount_Native(@Param("limit") int limit);
+
+    // 9) 특정 키워드를 포함하는 "댓글"이 달린 게시글 조회
+    public interface PostListProjection {
+        Long getId();
+        String getTitle();
+        String getContent();
+        String getAuthor();
+    }
+
+    @Query(value = """
+        SELECT 
+            P.id        AS id,
+            P.title     AS title,
+            p.content   AS content,
+            P.author    AS author
+        FROM    
+            posts P
+                LEFT JOIN comments C 
+                ON C.post_id = P.id
+        WHERE  
+            LOWER(C.content) LIKE LOWER(CONCAT('%', :keyword, '%'))
+        GROUP BY
+            P.id, P.title, P.content, P.author
+        ORDER BY
+            P.id DESC            
+    """, nativeQuery = true)
+    List<PostListProjection> findByCommentKeyword(@Param("keyword") String keyword);
 }
