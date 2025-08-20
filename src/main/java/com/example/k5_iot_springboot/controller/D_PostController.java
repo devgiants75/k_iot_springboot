@@ -98,11 +98,4 @@ public class D_PostController {
         ResponseDto<List<PostWithCommentCountResponseDto>> response = postService.getTop5PostsByComments();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
-
-
-
-
-
-
 }
