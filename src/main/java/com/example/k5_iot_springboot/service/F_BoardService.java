@@ -14,6 +14,6 @@ public interface F_BoardService {
     ResponseDto<List<BoardResponseDto.SummaryResponse>> getAllBoards();
     ResponseDto<BoardResponseDto.DetailResponse> updateBoard(Long boardId, BoardRequestDto.@Valid UpdateRequest request);
 
-    ResponseDto<BoardResponseDto.PageResponse> getBoardsPage(@Min(0) int page, @Min(1) @Min(100) int size, String[] sort);
+    ResponseDto<BoardResponseDto.PageResponse> getBoardsPage(@Min(0) int page, @Min(1) @Max(100) int size, String[] sort);
     ResponseDto<BoardResponseDto.SliceResponse> getBoardsByCursor(Long cursorId, @Min(1) @Max(100) int size);
 }
