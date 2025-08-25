@@ -113,15 +113,15 @@ public class WebSecurityConfig {
                             "/api/v1/auth/**"
                         ).permitAll()
                         // 읽기 공개 예시 (게시글 목록, 조회 등)
-                        .requestMatchers(HttpMethod.GET, "api/v1/boards/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/boards/**").permitAll()
                         .anyRequest().authenticated() // 나머지는 인증 필요
                 );
-        if (h2ConsoleEnabled) {
-            http.headers(headers
-                    -> headers.frameOptions(frame -> frame.sameOrigin()));
-            http.authorizeHttpRequests(auth
-                    -> auth.requestMatchers("/h2-console/**").permitAll());
-        }
+//        if (h2ConsoleEnabled) {
+//            http.headers(headers
+//                    -> headers.frameOptions(frame -> frame.sameOrigin()));
+//            http.authorizeHttpRequests(auth
+//                    -> auth.requestMatchers("/h2-console/**").permitAll());
+//        }
 
         // JWT 인증 필터를 UsernamePasswordAuthenticationFilter 앞에 배치
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
