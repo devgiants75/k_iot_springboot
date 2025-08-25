@@ -128,16 +128,11 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-    
+
     private static List<String> splitToList(String csv) {
         return Arrays.stream(csv.split(","))
                 .map(String::trim)
                 .filter(s -> !s.isBlank())
                 .toList();
     }
-
-
-
-
-
 }
