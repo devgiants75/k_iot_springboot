@@ -30,9 +30,18 @@ public class UserPrincipalMapper {
 
     @NonNull
     public UserPrincipal map(@NonNull G_User user) {
-        Collection<SimpleGrantedAuthority> authorities
-                = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+//        Collection<SimpleGrantedAuthority> authorities
+//                = List.of(new SimpleGrantedAuthority("ROLE_USER"));
 
+        Collection<? extends GrantedAuthority> authorities =
+                // 사용자 정보 내부의 권한이 비어져 있거나 없는 경우
+                (user.getRoles() == null || user.getRoles().isEmpty())
+                        // 기본 권한 "ROLE_USER" 부여
+                    ? List.of(new SimpleGrantedAuthority("ROLE_USER"))
+                        // 해당 권한(들)을 GrantedAuthority 타입으로 변환하여 반환
+                    : user.getRoles().stream()
+                        .map(r -> new SimpleGrantedAuthority("ROLE_" + r.name()))
+                        .toList();
 
         return UserPrincipal.builder()
                 .id(user.getId())
