@@ -60,6 +60,6 @@ public class G_AdminController {
             @Valid @RequestBody RoleManageRequest.RemoveRoleRequest req
     ) {
         ResponseDto<RoleManageResponse.RemoveRoleResponse> response = adminService.removeRole(principal, req);
-        return ResponseEntity.ok(ResponseDto.setSuccess("권한이 삭제되었습니다.", null));
+        return ResponseEntity.ok().body(response);
     }
 }

@@ -135,6 +135,10 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
 
 SELECT * FROM `user_roles`;
 
-
+# 샘플데이터 #
+INSERT INTO user_roles (user_id, role)
+VALUES (1, "ADMIN");
+INSERT INTO user_roles (user_id, role)
+VALUES (2, "USER");
 
 USE k5_iot_springboot;

@@ -72,6 +72,7 @@ public class G_AdminServiceImpl implements G_AdminService {
     }
 
     @Override
+    @Transactional
     public ResponseDto<RoleManageResponse.RemoveRoleResponse> removeRole(UserPrincipal principal, RoleManageRequest.@Valid RemoveRoleRequest req) {
         G_User user = userRepository.findWithRolesById(req.userId())
                 .orElseThrow(() -> new EntityNotFoundException("해당 id의 사용자가 없습니다."));
