@@ -2,6 +2,7 @@ package com.example.k5_iot_springboot.security;
 
 import com.example.k5_iot_springboot.entity.G_User;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +32,7 @@ public class UserPrincipalMapper {
     public UserPrincipal map(@NonNull G_User user) {
         Collection<SimpleGrantedAuthority> authorities
                 = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+
 
         return UserPrincipal.builder()
                 .id(user.getId())
