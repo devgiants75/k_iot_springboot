@@ -55,7 +55,4 @@ package com.example.k5_iot_springboot.이론;
     +) 이후 요청 처리 (인가 단계)
         - JWT 필터가 헤더의 토큰 검증 >> 유효하면 UserPrincipal 재구성 >> SecurityContext에 주입
 */
-
-
-
 public class V_SecurityContext {}
