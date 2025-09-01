@@ -1,9 +1,12 @@
 package com.example.k5_iot_springboot.entity;
 
+import com.example.k5_iot_springboot.entity.base.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "articles")
@@ -14,13 +17,17 @@ import lombok.NoArgsConstructor;
 // - 무분별한 객체 생성을 억제!
 // cf) JPA에서 엔티티 생성 시 기본 생성자가 반드시 필요!
 //      >> JPA를 위한 생성자를 프로젝트 전역에서 접근 하는 것을 방지!
-public class H_Article {
+public class H_Article extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @Column(nullable = false, length = 200)
     private String title;
 
+    @Lob
+    @JdbcTypeCode(SqlTypes.LONGVARCHAR) // LONGTEXT 타입과 호환
+    @Column(nullable = false)
     private String content;
 
     /** 작성자 (작성자:게시글 = 1:N) */
