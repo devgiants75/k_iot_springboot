@@ -25,13 +25,13 @@ public class NoticeController {
         return result;
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public Notice getById(@PathVariable Long id) {
         Notice result = noticeService.getById(id);
         return result;
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         noticeService.delete(id);
     }
