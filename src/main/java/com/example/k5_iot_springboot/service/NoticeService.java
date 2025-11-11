@@ -3,6 +3,7 @@ package com.example.k5_iot_springboot.service;
 import com.example.k5_iot_springboot.entity.Notice;
 import com.example.k5_iot_springboot.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

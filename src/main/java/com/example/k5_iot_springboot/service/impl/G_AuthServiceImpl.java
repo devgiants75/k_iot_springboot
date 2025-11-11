@@ -13,6 +13,7 @@ import com.example.k5_iot_springboot.repository.G_RoleRepository;
 import com.example.k5_iot_springboot.repository.G_UserRepository;
 import com.example.k5_iot_springboot.service.G_AuthService;
 import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -72,8 +73,14 @@ public class G_AuthServiceImpl implements G_AuthService {
         userRepository.save(user);
     }
 
+    /**
+     * 로그인
+     * - 인증 성공 시 Access/Refresh Token 발급
+     * - Refresh Token DB + 쿠키 저장
+     *
+     * */
     @Override // 읽기 전용
-    public ResponseDto<SignInResponse> signIn(SignInRequest req) {
+    public ResponseDto<SignInResponse> signIn(SignInRequest req, HttpServletResponse response) {
 
         // 스프링 시큐리티 표준 인증 흐름 (UserDetailsService + PasswordEnoder)
         Authentication auth = authenticationManager.authenticate(
@@ -92,8 +99,13 @@ public class G_AuthServiceImpl implements G_AuthService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
 
-        // 3) JWT 발급 (username=loginId, roles 포함)
+        // 3) Access Token 발급 (username=loginId, roles 포함)
+        //    + Refresh Token 생성
         String accessToken = jwtProvider.generateJwtToken(req.loginId(), roles);
+        String refreshToken = jwtProvider.generateRefreshToken(req.loginId(), roles);
+
+        // +) Refresh Token 저장 (기존의 토큰 삭제 후 신규 저장)
+
 
         // 4) 만료 시각 추출하여 응답에 포함
         Claims claims = jwtProvider.getClaims(accessToken);
