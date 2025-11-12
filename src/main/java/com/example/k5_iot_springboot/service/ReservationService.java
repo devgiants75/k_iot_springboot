@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReservationService {
     ResponseDto<List<ReservationResponseDto>> getReservationsByTruck(Long truckId);
+    ResponseDto<ReservationResponseDto> getReservation(Long truckId, Long reservationId);
 }
