@@ -1,7 +1,6 @@
 package com.example.k5_iot_springboot.dto.Reservation;
 
 import com.example.k5_iot_springboot.entity.Reservation;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
