@@ -1,6 +1,8 @@
 package com.example.k5_iot_springboot.controller;
 
+import com.example.k5_iot_springboot.dto.Reservation.ReservationResponseDto;
 import com.example.k5_iot_springboot.dto.ResponseDto;
+import com.example.k5_iot_springboot.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
